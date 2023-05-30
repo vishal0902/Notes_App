@@ -7,20 +7,29 @@ import ListNotes from './Components/ListNotes'
 
 export const App = () => {
 
-    const [note, setNote] = useState({})
+    // const [note, setNote] = useState({})
+
+    const [title,setTitle] = useState("")
+    const [body,setBody] = useState("")
 
     
 
     const [notesArray, setNotesArray] = useState([])
 
 
-    const handleInput = (e) => {
-        setNote({
-            ...note,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const handleInput = (e) => {
+    //     setNote({
+    //         ...note,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
+    const handleTitleInput = (e) => {
+        setTitle(e.target.value)
+    }
+    const handleBodyInput = (e) => {
+        setBody(e.target.value)
+    }
 
     const loadNotes = async () => {
         const response = await fetch("http://localhost:5000/note",{
@@ -35,6 +44,10 @@ export const App = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const note = {
+            title:title,
+            body:body
+        }
         try {
             await fetch("http://localhost:5000/note",{
                 method:"post",
@@ -47,6 +60,8 @@ export const App = () => {
         } catch (error) {
             
         }
+        setBody("")
+        setTitle("")
         
 
     }
@@ -81,9 +96,9 @@ export const App = () => {
         <div className="font-bold font-serif  justify-center space-x-3 flex flex-row">
             <form onSubmit = {handleSubmit}>
                 <span className='m-10'>Enter note title</span>
-                <input className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white' type="text" name="title" onChange={handleInput} />
+                <input value={title} className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white' type="text" name="title" onChange={handleTitleInput} />
                 <span className='m-10'>Enter note body</span>
-                <input  className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white '  type="text" name="body" onChange={handleInput} />
+                <input value={body} className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white '  type="text" name="body" onChange={handleBodyInput} />
                 <input type="submit" className='border-4  ml-10 px-1 justify-center mx-1 border-solid bg-slate-300 rounded-md text-sm' value="Submit" />
                 <div className='mt-10'>
                 <ListNotes handleRemove = {handleRemove}  notesArray = {notesArray} />
