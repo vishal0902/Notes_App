@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import Notes from './Components/Notes'
+
+import './App.css'
+import ListNotes from './Components/ListNotes'
 
 
 
@@ -45,9 +47,27 @@ export const App = () => {
         } catch (error) {
             
         }
+        
 
     }
 
+
+    const handleRemove = async (title) => {
+        const Url = `http://localhost:5000/note/${title}`
+        
+        document.getElementById(title).className="justify-center text-decoration-line: line-through space-x-5 py-3  flex-row flex"
+        
+        setTimeout(async()=>{
+            await fetch(Url,{
+                    method:"delete",
+                   
+            })
+            loadNotes()
+            document.getElementById(title).className="justify-center  space-x-5 py-3  flex-row flex"
+
+        },1000)
+        
+    }
  
 
 
@@ -58,23 +78,20 @@ export const App = () => {
 
 
     return (
-        <div>
+        <div className="font-bold font-serif  justify-center space-x-3 flex flex-row">
             <form onSubmit = {handleSubmit}>
-                <span>Enter note title</span>
-                <input type="text" name="title" onChange={handleInput} />
-                <span>Enter note body</span>
-                <input type="text" name="body" onChange={handleInput} />
-                <input type="submit" value="Submit" />
-               {
-                notesArray.length ?
-                notesArray.map((note,i)=>{
-                    return <Notes key = {i} title={note.title} body = {note.body} />
-                }) :
-                    <h3>No notes to display</h3>
-               }
+                <span className='m-10'>Enter note title</span>
+                <input className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white' type="text" name="title" onChange={handleInput} />
+                <span className='m-10'>Enter note body</span>
+                <input  className='border-4 border-lime-500 text-center rounded-xl bg-lime-950 text-white '  type="text" name="body" onChange={handleInput} />
+                <input type="submit" className='border-4  ml-10 px-1 justify-center mx-1 border-solid bg-slate-300 rounded-md text-sm' value="Submit" />
+                <div className='mt-10'>
+                <ListNotes handleRemove = {handleRemove}  notesArray = {notesArray} />
+                </div>
             </form>
         </div>
     )
+
 }
 
 export default App;

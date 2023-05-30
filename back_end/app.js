@@ -26,9 +26,22 @@ app.post('/note',(req,res)=>{
     res.end()
 })
 
+
+app.delete('/note/:title',(req,res)=>{
+    const {title} = req.params
+    const data = readData()
+    const dataAfterDel = data.filter((d)=>d.title!==title)
+    fs.writeFileSync('./Data/data.json',JSON.stringify(dataAfterDel))
+   
+    res.end()
+})
+
+
 app.get('/note',(req,res)=>{
     res.json(readData())
 })
+
+
 
 
 app.listen(5000,()=> console.log("Server listening on port 5000"))
