@@ -48,7 +48,15 @@ export const App = () => {
             title: title,
             body: body
         }
+
+        
         try {
+            notesArray.forEach(element => {
+                if(element.title === note.title){
+                    throw new Error('Duplicate Title')
+                }
+            });
+            
             await fetch("http://localhost:5000/note", {
                 method: "post",
                 body: JSON.stringify(note),
@@ -58,7 +66,7 @@ export const App = () => {
             })
             loadNotes()
         } catch (error) {
-
+            alert(error)
         }
         setBody("")
         setTitle("")
@@ -95,17 +103,19 @@ export const App = () => {
 
 
     return (
-        <div className="font-serif max-w-6xl from-neutral-800 font-semibold ">
+        <div className="font-display  justify-center flex from-neutral-800 antialiased font-medium">
             <form onSubmit={handleSubmit}>
-                <div className=''>
-                    <div className=' justify-center space-x-3 flex flex-row'>
-                        <span className='text-lg'>Enter note title</span>
-                        <input id='title' value={title} className=' shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="title" onChange={handleTitleInput} />
-                        <span className='text-lg'>Enter note body</span>
-                        <input value={body} className=' shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="body" onChange={handleBodyInput} />
+                <div className='relative'>
+                    <div className='  justify-center space-x-3 flex flex-row'>
+                        <span className='w-40  text-white text-2xl'>Enter note title</span>
+                        <input id='title' value={title} className='w-52  shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="title" onChange={handleTitleInput} />
+                        </div>
+                    <div className=' justify-center space-x-3 mt-4 h-40 flex flex-row'>
+                        <span className='w-40 text-white  text-2xl'>Enter note body</span>
+                        <textarea value={body} className=' w-52 h-40 shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="body" onChange={handleBodyInput} />
                     </div>
-                    <div className='justify-center flex mt-5'>
-                    <input type="submit" className=' shadow-xl shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg' value="Save Note" />
+                    <div className='justify-center relative flex mt-5'>
+                    <input type="submit" className=' hover:bg-slate-100 hover:text-black absolute right-14 shadow-xl shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg' value="Save Note" />
                     </div>
                 </div>
                 <div className='mt-10 flex justify-center flex-wrap space-x-3 '>

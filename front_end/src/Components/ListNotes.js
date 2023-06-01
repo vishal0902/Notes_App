@@ -9,16 +9,18 @@ function ListNotes(props) {
         props.notesArray.length ?
             props.notesArray.map((note, i) => {
                 return (
-                    <div id={note.title} key={i} onClick={() => props.handleRemove(note.title)} className="justify-center   space-x-5 py-3  flex-row flex">
-                        <div className="h-60 w-60  shadow-slate-900 shadow-2xl  text-white bg-slate-600  border-slate-700 rounded-lg border-2">
-                            <div className="border-black  pl-2 border-b-2 text-lg">{note.title}</div>
-                            <div className=" pl-2">{note.body}</div>
+                    <div id={note.title} key={i}  className="justify-center   space-x-5 py-3  flex-row flex">
+                        <div className="h-60 w-60 relative  shadow-slate-900 shadow-2xl  text-white bg-slate-500 border-slate-700 rounded-lg border-2">
+                            <div className="border-black bg-red-900 text-2xl  pl-2 border-b-2 ">{note.title}</div>
+                            <div className="text-lg pl-2   ">{note.body}</div>
+                            <div className="absolute bottom-0 right-0"><img className="h-10 w-10" onClick={() => props.handleRemove(note.title)} src="delete.svg"/></div>
                         </div>
                     </div>
                 )
             }) :
-            <h3 className="h-60 w-60 text-center  shadow-slate-900 shadow-2xl  text-white bg-slate-600  border-slate-700 rounded-lg border-2">No notes to display</h3>
-
+            <div className="">
+                <h3 className="absolute mt-5 h-10 w-40 text-center  shadow-slate-900 shadow-2xl  text-white bg-slate-600  border-slate-700 rounded-lg border-2">No notes to display</h3>
+            </div>
     )
 
 }
