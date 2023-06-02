@@ -45,8 +45,8 @@ export const App = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const note = {
-            title: title,
-            body: body
+            title: title.trim(),
+            body: body.trim()
         }
 
         
@@ -89,7 +89,7 @@ export const App = () => {
             loadNotes()
             document.getElementById(title).className = "justify-center  space-x-5 py-3  flex-row flex"
 
-        }, 500)
+        }, 200)
 
     }
 
