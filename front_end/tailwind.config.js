@@ -11,6 +11,7 @@ module.exports = {
       'mono': ['ui-monospace', 'SFMono-Regular'],
       'display': ['Montserrat','Oswald'],
       'body': ['"Open Sans"'],
+      'custom' : ['Copperplate Gothic Bold']
     }
   },
   plugins: [],

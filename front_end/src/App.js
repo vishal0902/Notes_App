@@ -103,22 +103,23 @@ export const App = () => {
 
 
     return (
-        <div className="font-display  justify-center flex from-neutral-800 antialiased font-medium">
+        <div className="font-display  justify-center flex flex-col from-neutral-800 antialiased font-medium">
+            <div className='font-extrabold text-white mb-5 font-custom justify-center flex flex-row text-4xl'>Notes App 1.0.0</div>
             <form onSubmit={handleSubmit}>
                 <div className='relative'>
                     <div className='  justify-center space-x-3 flex flex-row'>
-                        <span className='w-40  text-white text-2xl'>Enter note title</span>
-                        <input id='title' value={title} className='w-52  shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="title" onChange={handleTitleInput} />
+                        
+                        <input id='title' placeholder='Title' value={title} className='w-52  shadow-lg shadow-slate-700  px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="title" onChange={handleTitleInput} />
                         </div>
                     <div className=' justify-center space-x-3 mt-4 h-40 flex flex-row'>
-                        <span className='w-40 text-white  text-2xl'>Enter note body</span>
-                        <textarea value={body} className=' w-52 h-40 shadow-lg shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="body" onChange={handleBodyInput} />
+                        
+                        <textarea placeholder='Type your notes here...' value={body} className=' w-52 h-40 shadow-lg shadow-slate-700  px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg'  type="text" name="body" onChange={handleBodyInput} />
                     </div>
                     <div className='justify-center relative flex mt-5'>
-                    <input type="submit" className=' hover:bg-slate-100 hover:text-black absolute right-14 shadow-xl shadow-slate-700 ml-10 px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg' value="Save Note" />
+                    <input type="submit" className=' hover:bg-slate-100 justify-center hover:text-black  shadow-xl shadow-slate-700  px-1 border-4 border-slate-700 text-white mx-1 border-solid bg-slate-700 rounded-md text-lg' value="Save Note" />
                     </div>
                 </div>
-                <div className='mt-10 flex justify-center flex-wrap space-x-3 '>
+                <div className=' flex justify-center flex-wrap space-x-3 '>
                     <ListNotes handleRemove={handleRemove} notesArray={notesArray} />
                 </div>
             </form>
